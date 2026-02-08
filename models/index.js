@@ -10,9 +10,13 @@ const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
 let sequelize;
+
 if (config.use_env_variable) {
+   console.log("Using Environment Variable:", config.use_env_variable);
+  console.log("Connection String:", process.env[config.use_env_variable]); // Check if this is the Render URL
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
+  console.log('⚠️ Falling back to Local Config (username/password)');
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 

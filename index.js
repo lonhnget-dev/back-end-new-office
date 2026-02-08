@@ -1,7 +1,7 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const db = require("./models");
-require('dotenv').config();
 
 // 1. Import Routes
 const factoryRoute = require("./src/routes/factory");
@@ -35,15 +35,15 @@ app.use('/api/v1/inspections', inspectionRoutes);
 
 // 4. Database Connection & Server Start
 // Using { alter: true } keeps your data while updating table structures
-db.sequelize.sync({ alter: true }) 
+db.sequelize.authenticate()
   .then(() => {
-    console.log("✅ Database synced successfully (Alter mode active)");
+    console.log("✅ Connection to the database has been established successfully.");
     app.listen(port, () => {
-      console.log(`🚀 Server live at http://localhost:${port}`);
+      console.log(`🚀 Server live on port ${port}`);
     });
   })
   .catch(err => {
-    console.error("❌ Database Error:", err.message);
+    console.error("❌ Unable to connect to the database:", err.message);
   });
 
 // 5. Global Error Handler
