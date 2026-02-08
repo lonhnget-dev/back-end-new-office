@@ -15,11 +15,8 @@ const inspectionRoutes = require('./src/routes/inspectionRoutes');
 const app = express();
 const port = 3000;
 
-// 2. Middleware
-app.use(cors({
-  origin: 'https://inspect-office-five.vercel.app',
-  credentials: true
-}));
+// 2. Middleware // CORS Configuration that allows requests from any origin
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
